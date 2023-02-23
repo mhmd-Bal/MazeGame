@@ -7,8 +7,8 @@ window.onload = function(){
     var Lost_beforestart = false;
     var Score = 0;
     var Score_text = document.createElement('h2');
-    Score_text.innerText = "Score: " + Score;
     Status.after(Score_text);
+    scorePrint();
 
 
     // Game Functions:
@@ -19,13 +19,14 @@ window.onload = function(){
                 Boundaries[i].classList.toggle("youlose");
             }
             Lost_beforestart = false;
-            console.log("Start is clicked!");
         }
         Game_started = true;
+        Status.innerText = "Reach The End!";
     }
 
     function gameStart() {
-        Start.addEventListener('click', gameState);
+        Start.addEventListener('click', gameRestart);
+        Start.addEventListener('mouseover', gameState);
         gamePlay();
     }
 
@@ -42,25 +43,31 @@ window.onload = function(){
             for (var i=0; i < Boundaries.length; i++) {
                 Boundaries[i].classList.toggle("youlose");
             }
-            Status.innerText = "You Lose!";
+            Status.innerText = "You Lost!";
             Game_started = false;
             Lost_beforestart = true;
+            Score -= 10;
+            scorePrint();
         }
     }
 
     function gameWon() {
         if(Game_started){
-            Status.textContent = "You Win!";
+            Status.textContent = "You Won!";
             Game_started = false;
+            Score += 5;
+            scorePrint();
         }
     }
 
-    function gameEnd() {
-        
+    function gameRestart() {
+        Score = 0;
+        scorePrint();
+        gameState();
     }
 
-    function scoreReset() {
-
+    function scorePrint() {
+        Score_text.innerText = "Score: " + Score;
     }
 
     // The actual game
