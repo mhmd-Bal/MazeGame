@@ -5,26 +5,10 @@ window.onload = function(){
     var Boundaries = document.getElementsByClassName("boundary");
     var Game_started = false;
     var Lost_beforestart = false;
-    var Is_down = false;
     var Score = 0;
     var Score_text = document.createElement('h2');
     Status.after(Score_text);
     scorePrint();
-
-    Start.addEventListener("mousedown", function(){
-        Is_down = true;
-    });
-    Start.addEventListener("mouseup", function(){
-        Is_down = false;
-    });
-    Start.addEventListener('mousemove', function(e){
-        if(Is_down){
-            var Mouse_Xposition = e.clientX;
-            var Mouse_Yposition = e.clientY;
-            Start.style.left = Mouse_Xposition + "px";
-            Start.style.top  = Mouse_Yposition + "px";
-        }
-    });
 
     function gameState() {
         if(!Game_started && Lost_beforestart){
@@ -41,6 +25,7 @@ window.onload = function(){
         Start.addEventListener('click', gameRestart);
         Start.addEventListener('mouseover', gameState);
         gamePlay();
+        draggingStart();
     }
 
     function gamePlay() {
@@ -81,6 +66,16 @@ window.onload = function(){
 
     function scorePrint() {
         Score_text.innerText = "Score: " + Score;
+    }
+
+    function draggingStart() {
+        Start.addEventListener('mousemove', function(e) { 
+            Start.style.position = "fixed";
+            var mousepositionx = e.clientX;
+            var mousepositiony = e.clientY;
+            Start.style.left = mousepositionx - 15 + "px";
+            Start.style.top  = mousepositiony - 15 + "px";
+        });
     }
 
     
