@@ -6,6 +6,10 @@ window.onload = function(){
     var Game_started = false;
     var Lost_beforestart = false;
     var Score = 0;
+    var Score_text = document.createElement('h2');
+    Score_text.innerText = "Score: " + Score;
+    Status.after(Score_text);
+
 
     // Game Functions:
 
@@ -29,6 +33,8 @@ window.onload = function(){
         for (var i=0; i < Boundaries.length; i++) {
             Boundaries[i].addEventListener('mouseover', gameLost);
         }
+
+        End.addEventListener("mouseover", gameWon);
     }
 
     function gameLost() {
@@ -36,18 +42,21 @@ window.onload = function(){
             for (var i=0; i < Boundaries.length; i++) {
                 Boundaries[i].classList.toggle("youlose");
             }
-            Status.textContent = "You Lose!";
+            Status.innerText = "You Lose!";
             Game_started = false;
             Lost_beforestart = true;
         }
     }
 
     function gameWon() {
-        
+        if(Game_started){
+            Status.textContent = "You Win!";
+            Game_started = false;
+        }
     }
 
     function gameEnd() {
-
+        
     }
 
     function scoreReset() {
@@ -57,5 +66,6 @@ window.onload = function(){
     // The actual game
 
     gameStart();
+
  }
 
