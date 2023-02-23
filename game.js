@@ -3,7 +3,6 @@ window.onload = function(){
     var End = document.getElementById("end");
     var Status = document.getElementById("status");
     var Boundaries = document.getElementsByClassName("boundary");
-    var Boundary = document.getElementById("boundary1");
     var Game_started = false;
     var Lost_beforestart = false;
     var Score = 0;
@@ -29,21 +28,19 @@ window.onload = function(){
         draggingStart();
     }
 
+    // gamePlay() without Bonus:
+
+    // function gamePlay() {
+    //     for (var i=0; i < Boundaries.length; i++) {
+    //         Boundaries[i].addEventListener('mouseover', gameLost);
+    //     }
+    //     End.addEventListener("mouseover", gameWon);
+    // }
+
+    //gamePlay() with Bonus:
+
     function gamePlay() {
-        for (var i=0; i < Boundaries.length; i++) {
-            Boundaries[i].addEventListener('mouseover', gameLost);
-        }
-
-        End.addEventListener("mouseover", gameWon);
-        setInterval(function() {
-
-            if (startTouchedBoundary(Start, Boundary)) {
-              gameLost();
-            }
-            else{
-                console.log("No colision");
-            }
-          }, 300);
+        document.addEventListener('mousemove', checkStart);
     }
 
     function gameLost() {
@@ -90,19 +87,31 @@ window.onload = function(){
         });
     }
 
-    function originalPosition(){
+    function originalPosition() {
         Start.style.position = "absolute";
         Start.style.top = 205 + "px";
         Start.style.left = 0 + "px";
     }
 
-    function startTouchedBoundary(Start, Boundary) {
+    function startTouchedBlock(Start, Block) {
         var Start_rect = Start.getBoundingClientRect();
-        var Boundary_rect = Boundary.getBoundingClientRect();
-        return (Start_rect.right >= Boundary_rect.left && Start_rect.left <= Boundary_rect.right) && (Start_rect.bottom >= Boundary_rect.top && Start_rect.top <= Boundary_rect.bottom);
-      }
+        var Block_rect = Block.getBoundingClientRect();
+        return (Start_rect.right >= Block_rect.left && Start_rect.left <= Block_rect.right) && (Start_rect.bottom >= Block_rect.top && Start_rect.top <= Block_rect.bottom);
+    }
 
-    
+    function checkStart() {
+        for (var i=0; i < Boundaries.length; i++) {
+            var Boundary = Boundaries[i];
+            if(startTouchedBlock(Start, Boundary)) {
+                gameLost();
+            } 
+        }
+
+        if(startTouchedBlock(Start, End)) {
+            gameWon();
+        }
+    }
+
 
 
     gameStart();
