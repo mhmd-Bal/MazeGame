@@ -25,9 +25,6 @@ window.onload = function(){
     function gameStart() {
         Start.addEventListener('click', gameRestart);
         Start.addEventListener('mouseover', gameState);
-        Start.addEventListener('mousedown', function(){
-            console.log("You're holding");
-        });
         gamePlay();
     }
 
