@@ -11,8 +11,6 @@ window.onload = function(){
     scorePrint();
 
 
-    // Game Functions:
-
     function gameState() {
         if(!Game_started && Lost_beforestart){
             for (var i=0; i < Boundaries.length; i++) {
@@ -27,6 +25,9 @@ window.onload = function(){
     function gameStart() {
         Start.addEventListener('click', gameRestart);
         Start.addEventListener('mouseover', gameState);
+        Start.addEventListener('mousedown', function(){
+            console.log("You're holding");
+        });
         gamePlay();
     }
 
@@ -70,7 +71,6 @@ window.onload = function(){
         Score_text.innerText = "Score: " + Score;
     }
 
-    // The actual game
 
     gameStart();
 
