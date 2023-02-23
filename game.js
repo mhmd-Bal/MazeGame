@@ -10,12 +10,6 @@ window.onload = function(){
     // Game Functions:
 
     function gameState() {
-        if(Game_started && Lost_beforestart){
-            for (var i=0; i < Boundaries.length; i++) {
-                Boundaries[i].classList.toggle("youlose");
-            }
-            Lost_beforestart = false;
-        }
         if(!Game_started && Lost_beforestart){
             for (var i=0; i < Boundaries.length; i++) {
                 Boundaries[i].classList.toggle("youlose");
