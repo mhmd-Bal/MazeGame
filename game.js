@@ -46,6 +46,7 @@ window.onload = function(){
             Lost_beforestart = true;
             Score -= 10;
             scorePrint();
+            originalPosition();
         }
     }
 
@@ -55,6 +56,7 @@ window.onload = function(){
             Game_started = false;
             Score += 5;
             scorePrint();
+            originalPosition();
         }
     }
 
@@ -76,6 +78,12 @@ window.onload = function(){
             Start.style.left = mousepositionx - 15 + "px";
             Start.style.top  = mousepositiony - 15 + "px";
         });
+    }
+
+    function originalPosition(){
+        Start.style.position = "absolute";
+        Start.style.top = 205 + "px";
+        Start.style.left = 0 + "px";
     }
 
     
