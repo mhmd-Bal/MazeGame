@@ -54,6 +54,9 @@ window.onload = function(){
             Score -= 10;
             scorePrint();
             originalPosition();
+            // setTimeout(function(){
+            //     console.log("Taking a break");
+            // }, 3000);
         }
     }
 
