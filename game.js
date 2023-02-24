@@ -111,8 +111,20 @@ window.onload = function(){
         }
 
         if(startTouchedBlock(Start, End)) {
-            gameWon();
+            if(!gameCheating){
+                gameWon();
+            }else{
+                Status.textContent = "NO CHEATING!";
+                Game_started = false;
+                originalPosition();
+            }
         }
+    }
+
+    function gameCheating() {
+        var Start_rect = Start.getBoundingClientRect();
+        var End_rect = End.getBoundingClientRect();
+        return(Start_rect.left <= End_rect.right);
     }
 
 
