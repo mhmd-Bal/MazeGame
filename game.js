@@ -124,7 +124,7 @@ window.onload = function(){
     function gameCheating() {
         var Start_rect = Start.getBoundingClientRect();
         var End_rect = End.getBoundingClientRect();
-        return(Start_rect.left <= End_rect.right);
+        return(Start_rect.left <= End_rect.right && Start_rect.right >= End_rect.left + 50);
     }
 
 
